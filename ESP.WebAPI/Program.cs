@@ -45,8 +45,9 @@ public class Program
         builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
         builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY")!;
+        //Permet de valider les tokens JWT reçus
 
+        var jwtKey = builder.Configuration["Jwt:Key"]!;
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -114,8 +115,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthorization();
         app.UseCors("AllowReact");
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.MapControllers();
 
         app.Run();

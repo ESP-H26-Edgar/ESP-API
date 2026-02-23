@@ -10,7 +10,8 @@ out/
 # -------------------------
 # Fichiers de configuration locaux
 # -------------------------
-.env                  
+.env  
+appsettings.json
 secrets.json          
 *.user                
 *.suo

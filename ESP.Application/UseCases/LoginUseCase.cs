@@ -1,10 +1,14 @@
 ﻿
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using ESP.Application.DTOS;
 using ESP.Domain.Interfaces.Repositories;
 using ESP.Domain.Interfaces.Security;
 using ESP.Infrastructure.Security;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace ESP.Application.UseCases
@@ -43,6 +47,26 @@ namespace ESP.Application.UseCases
                 throw new Exception("Invalid  password");
 
             return _jwtTokenService.GenerateToken(user.Mail, user.IsAdmin);
+        }
+
+        public string GenerateToken(string mail, bool isAdmin)
+        {
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("D452qs456453qsdKBHF!;WXD!Hds241F"));
+
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.Email, mail),
+            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User")
+        };
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(60),
+                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
