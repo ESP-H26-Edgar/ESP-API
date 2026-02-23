@@ -24,7 +24,9 @@ jobs:
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{secrets.USER_VM}}@${{secrets.IP_VM}} "\
-            cd /var/www/ESP || git clone https://github.com/EdgarCegepRDL/ESP-H26-Edgar.git /var/www/ESP-API; \
-            cd /var/www/ESP; \
+            cd /var/www/ESP || rm -rf ESP-API
+            cd /var/www/ESP|| mkdir ESP-API
+            cd /var/www/ESP-API || git clone https://github.com/EdgarCegepRDL/ESP-H26-Edgar.git /var/www/ESP-API; \
+            cd /var/www/ESP-API; \
             git fetch origin main; \
             git reset --hard origin/main"
