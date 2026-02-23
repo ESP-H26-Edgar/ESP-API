@@ -39,7 +39,7 @@
       ```
    3. Ajout du fichier appsetting.json dans le dossier /ESP.API
       ```bash
-      {
+     {
     "ConnectionStrings": {
         "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
     },
@@ -55,7 +55,7 @@
     },
     "AllowedHosts": "*"
      }
-     ```
+    ```
 
 
  # Demarage du serveur en dev :
