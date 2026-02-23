@@ -39,22 +39,22 @@
       ```
    3. Ajout du fichier appsetting.json dans le dossier /ESP.API
     ```bash
-      {
-     "ConnectionStrings": {
-         "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
-     },
-     "Jwt": {
-         "Key": "(Votre TokenJWT ici)",
-         "ExpiresMinutes": "60"
-     },
-     "Logging": {
-         "LogLevel": {
-             "Default": "Information",
-             "Microsoft.AspNetCore": "Warning"
-         }
-     },
-     "AllowedHosts": "*"
-      }
+             {
+            "ConnectionStrings": {
+                "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
+            },
+            "Jwt": {
+                "Key": "(Votre TokenJWT ici)",
+                "ExpiresMinutes": "60"
+            },
+            "Logging": {
+                "LogLevel": {
+                    "Default": "Information",
+                    "Microsoft.AspNetCore": "Warning"
+                }
+            },
+            "AllowedHosts": "*"
+             }
     ```
 
 
