@@ -11,9 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESP.Application", "ESP.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESP.Infrastructure", "ESP.Infrastructure\ESP.Infrastructure.csproj", "{0605D142-1EAC-4D7A-BE36-55F7BE10B018}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTests", "ApplicationTests\ApplicationTests.csproj", "{4D3A12F0-A876-4CD7-83FA-00A7B47AE3A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "ApplicationTests\ApplicationTests.csproj", "{4D3A12F0-A876-4CD7-83FA-00A7B47AE3A8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8055F346-446C-4D9D-944A-5ACB0420A82A} = {8055F346-446C-4D9D-944A-5ACB0420A82A}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{E26C268E-33FB-412F-BE8C-0B6E033E67F8}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
 	EndProjectSection
 EndProject
 Global

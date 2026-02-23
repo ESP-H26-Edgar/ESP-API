@@ -10,12 +10,12 @@ using ESP.Application.Validators;
 using Microsoft.AspNetCore.Identity;
 using ESP.Infrastructure.Security;
 using ESP.Application.DTOS;
-
-
+using DotNetEnv;
 public class Program
 {
     public static void Main(string[] args)
     {
+        Env.Load();
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -25,11 +25,19 @@ public class Program
         builder.Services.AddScoped<LoginUseCase>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+        var connectionTemplate = builder.Configuration.GetConnectionString("DefaultConnection");
+
+        var connectionString = connectionTemplate
+            .Replace("%DB_HOST%", Environment.GetEnvironmentVariable("DB_HOST")!)
+            .Replace("%DB_PORT%", Environment.GetEnvironmentVariable("DB_PORT")!)
+            .Replace("%DB_NAME%", Environment.GetEnvironmentVariable("DB_NAME")!)
+            .Replace("%DB_USER%", Environment.GetEnvironmentVariable("DB_USER")!)
+            .Replace("%DB_PASSWORD%", Environment.GetEnvironmentVariable("DB_PASSWORD")!);
+
         builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-        ));
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+);
+        ;
 
         builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
 

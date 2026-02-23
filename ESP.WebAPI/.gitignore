@@ -1,0 +1,47 @@
+﻿#Fichier généré par IA
+
+# -------------------------
+# Fichiers binaires et build
+# -------------------------
+bin/
+obj/
+out/
+
+# -------------------------
+# Fichiers de configuration locaux
+# -------------------------
+.env                  
+secrets.json          
+*.user                
+*.suo
+*.userosscache
+*.sln.docstates
+
+# -------------------------
+# Logs et fichiers temporaires
+# -------------------------
+*.log
+*.vs/
+*.vscode/
+*.DS_Store
+*.tmp
+*.cache
+
+# -------------------------
+# Fichiers générés par .NET
+# -------------------------
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.lock.json
+
+# -------------------------
+# Packages NuGet
+# -------------------------
+*.nupkg
+packages/
+.nuget/
+
+
+
