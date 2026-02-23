@@ -1,6 +1,7 @@
 ﻿using Azure;
 using ESP.Application.DTOS;
 using ESP.Application.UseCases;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESP.API.Controllers
@@ -20,13 +21,20 @@ namespace ESP.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var result = await _loginUseCase.Execute(loginDto);
-
-            return Ok(result);
-
-
+            try
+            {
+                var token = await _loginUseCase.Execute(loginDto);
+                return Ok(token);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
-
-       
     }
 }
+

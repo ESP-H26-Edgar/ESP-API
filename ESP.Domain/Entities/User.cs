@@ -23,7 +23,7 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    public bool? IsAdmin { get; set; }
+    public bool IsAdmin { get; set; }
 
     public virtual ICollection<Registration> Registrations { get; set; } = new List<Registration>();
 

@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using ESP.Infrastructure.Security;
 using ESP.Application.DTOS;
 using DotNetEnv;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 public class Program
 {
     public static void Main(string[] args)
@@ -18,7 +21,7 @@ public class Program
         Env.Load();
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        
         builder.Services.AddControllers();
 
 
@@ -40,9 +43,25 @@ public class Program
         ;
 
         builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
-
         builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY")!;
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtKey))
+                };
+            });
+
+        builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
         builder.Services.AddCors(options =>
         {
@@ -53,11 +72,37 @@ public class Program
                     .AllowAnyMethod());
         });
 
-        
+
 
         // Add Swagger/OpenAPI
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            //aide de l'ia pour cette partie
+            c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                Description = "Entrez votre token JWT ici"
+            });
+            c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+            {
+                {
+                    new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                    {
+                        Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                        {
+                            Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                }
+            });
+        });
 
         var app = builder.Build();
 

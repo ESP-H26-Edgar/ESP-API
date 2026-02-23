@@ -14,7 +14,8 @@ namespace ESP.Application.Validators
         {
             RuleFor(x => x.mail)
                 .NotEmpty()
-                .EmailAddress();
+                .EmailAddress()
+                .WithMessage("Veuillez entrer un email valide");
             RuleFor(x => x.password)
                .NotEmpty()
                .MaximumLength(200);

@@ -14,15 +14,17 @@ namespace ESP.Application.UseCases
         private readonly IUserRepository _userRepository;
         private readonly IValidator<LoginDto> _validator;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IJwtTokenService _jwtTokenService;
 
-        public LoginUseCase(IUserRepository userRepository,IValidator<LoginDto> validator,IPasswordHasher passwordHasher)
+        public LoginUseCase(IUserRepository userRepository,IValidator<LoginDto> validator,IPasswordHasher passwordHasher, IJwtTokenService jwtTokenService)
         {
             _userRepository = userRepository;
             _validator = validator;
+            _jwtTokenService = jwtTokenService;
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<LoginDto> Execute(LoginDto loginDto)
+        public async Task<string> Execute(LoginDto loginDto)
         {
             
            ValidationResult validationResult =await _validator.ValidateAsync(loginDto);
@@ -40,7 +42,7 @@ namespace ESP.Application.UseCases
             if (!password)
                 throw new Exception("Invalid  password");
 
-            return loginDto;
+            return _jwtTokenService.GenerateToken(user.Mail, user.IsAdmin);
         }
     }
 }
