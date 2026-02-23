@@ -36,4 +36,11 @@ jobs:
                         
             git fetch origin main
             git reset --hard origin/main
+            
+            dotnet restore
+            dotnet publish -c Release -o /var/www/ESP/ESP-API/publish
+
+            # Redémarrer le service systemd
+            sudo systemctl restart esp-api
+            
           "
