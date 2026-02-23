@@ -11,7 +11,8 @@ out/
 # Fichiers de configuration locaux
 # -------------------------
 .env  
-secrets.json          
+secrets.json
+appsettings.json         
 *.user                
 *.suo
 *.userosscache

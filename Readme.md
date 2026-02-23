@@ -1,15 +1,61 @@
-﻿# Pour instancier la bd, exécuter dans
+ # RacePortal
 
-1. Installer ef core https://learn.microsoft.com/en-us/ef/core/get-started/overview/install 
-1. Ajouter Pomelo à ton projet qui possède le lien vers la base de données.
-1. Faire un build de la solution.
-1. Ouvrir une fenêtre console dans visual studio en cliquant droit sur le projet ESP.Infrastructure + terminal
-1. Faire la commmande ci-dessous pour importer la base de données dans le code selon l'approche data first
+ > Application codée en C# pour la back-end avec une API .NET, en React pour le front-end. 
+ 
+ # Prérequis
+ 
+  ## Installation de Node.js
+  ```bash
+    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+    sudo apt install nodejs -y
+  ```
+  ## Installation de .NET
+  ```bash
+    wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    sudo apt update
 
-```powershell
-dotnet ef dbcontext scaffold "server=localhost;port=3306;database=LE_NOM_DE_TA_BD;uid=root;password=root" Pomelo.EntityFrameworkCore.MySql -o ../ESP.Domain/Entities -c AppDbContext
-```
+    sudo apt install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
+  ```
+  ## Installation de MariaDB
+   ```bash
+     sudo apt install mariadb-server mariadb-client -y
+  ```
+  ## Installation de Nginx
+  ```bash
+     sudo apt install nginx -y
+     sudo systemctl start nginx
+     sudo systemctl enable nginx
+  ```
 
-La ligne de commande va te produire un nouveau fichier AppDbContext que tu pourras utiliser pour remplacer celui qui est existant. Toutes tes entités seront ainsi crées à partir de la base de données.
+ # Demarage du serveur en dev :
+  Front-end : 
+   ```bash
+     npm run dev
+   ```
+   Back-end :
+   ```bash
+     dotnet run
+   ```
+
+ # Demarage du serveur en prod :
+  Front-end : 
+   ```bash
+     npm run build
+   ```
+   Back-end :
+   ```bash
+     sudo systemctl start (nom de l'api)
+     sudo cp -r dist/* /var/www/html/
+
+     sudo systemctl reload nginx
+   ```
+   
+ 
+
+
+
+
+
 
 
