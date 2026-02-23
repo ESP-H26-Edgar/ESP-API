@@ -1,0 +1,70 @@
+./obj
+./bin
+./.vs# User-specific files
+.idea/
+.vs/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer directory
+\obj\
+\bin\
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]Release/
+[Dd]ebug\
+[Dd]ebugPublic\
+[Dd]Release\
+[Dd]ReleasePublic\
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer directory
+obj/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET 5/6/7/8+
+.vscode/
+.vs2019/
+.vs2017/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Azure Functions
+local.settings.json
+
+# Npm packages
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
