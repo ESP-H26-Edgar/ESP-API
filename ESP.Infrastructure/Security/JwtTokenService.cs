@@ -24,7 +24,7 @@ namespace ESP.Infrastructure.Security
         {
             _config = config;
         }
-
+        // aide de chat gpt pour le gestion du token JWT
         public string GenerateToken(string mail, bool isAdmin)
         {
             var jwtKey = _config["Jwt:Key"]!;
