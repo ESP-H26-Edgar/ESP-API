@@ -39,7 +39,9 @@ jobs:
             
             dotnet restore
             dotnet publish -c Release -o /var/www/ESP/ESP-API/publish
-
+            cp /var/www/ESP/appsettings.json /var/www/ESP/ESP-API/publish/appsettings.json
+            cp /var/www/ESP/.env /var/www/ESP/ESP-API/publish/.env
+            
             # Redémarrer le service systemd
             sudo systemctl restart esp-api
             
