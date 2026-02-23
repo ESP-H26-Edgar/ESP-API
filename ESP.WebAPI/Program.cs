@@ -114,7 +114,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
         app.UseCors("AllowReact");
         app.UseAuthentication();
         app.UseAuthorization();
