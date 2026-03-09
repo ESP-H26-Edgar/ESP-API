@@ -24,7 +24,18 @@ namespace ESP.API.Controllers
             try
             {
                 var token = await _loginUseCase.Execute(loginDto);
-                return Ok(token);
+                //cookie fait avec l'ia
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,        
+                    Secure = true,          
+                    SameSite = SameSiteMode.Strict, 
+                    Expires = DateTimeOffset.UtcNow.AddHours(8)
+                };
+
+                Response.Cookies.Append("auth_token", token, cookieOptions);
+
+                return Ok(new { message = "Connexion réussie" });
             }
             catch (ValidationException ex)
             {
