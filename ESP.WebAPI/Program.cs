@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using ESP.Infrastructure;
@@ -9,11 +8,11 @@ using ESP.Domain.Interfaces.Security;
 using ESP.Application.Validators;
 using Microsoft.AspNetCore.Identity;
 using ESP.Infrastructure.Security;
-using ESP.Application.DTOS;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ESP.Application;
 public class Program
 {
     public static void Main(string[] args)
@@ -21,8 +20,9 @@ public class Program
         Env.Load();
         var builder = WebApplication.CreateBuilder(args);
 
-        
+
         builder.Services.AddControllers();
+        builder.Services.AddApplication();
 
 
         builder.Services.AddScoped<LoginUseCase>();
