@@ -57,7 +57,11 @@
        }
        ```
 
-
+ 4. Ajoute le package jwt
+   ```bash
+     cd /var/www/ESP/ESP-API/ESP.WebAPI
+     dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+   ```
  # Demarage du serveur en dev :
    Back-end :
    ```bash
