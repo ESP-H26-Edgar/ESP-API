@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ESP.Domain\ESP.Domain.csproj" />
   </ItemGroup>
-
+    
   <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
