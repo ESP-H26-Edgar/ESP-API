@@ -26,4 +26,8 @@
     <ProjectReference Include="..\ESP.Infrastructure\ESP.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
