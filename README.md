@@ -61,6 +61,16 @@
    ```bash
      cd /var/www/ESP/ESP-API/ESP.WebAPI
      dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+   ```
+   Il peut y avoir des problèmes de dépendances si cela arrive, ajouter les dépendances suivantes : 
+   ```bash
+     cd /var/www/ESP/ESP-API/ESP.WebAPI
+     dotnet add package System.IdentityModel.Tokens.Jwt --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Tokens --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Protocols --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Logging --version 7.1.2
+
    ```
  # Demarage du serveur en dev :
    Back-end :
