@@ -1,5 +1,6 @@
 ﻿
 using ESP.Application.UseCases;
+using ESP.Application.UseCases.Interface;
 using ESP.Application.Validators;
 using ESP.Domain.Interfaces.Repositories;
 using ESP.Domain.Interfaces.Security;
@@ -19,14 +20,12 @@ public static class DependencyInjection
         services.AddScoped<LoginUseCase>();
         services.AddScoped<IUserRepository, UserRepository>();
 
-
         services.AddValidatorsFromAssemblyContaining<LoginValidation>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
-
-
-
         services.AddScoped<IJwtTokenService, JwtTokenService>();
 
+        services.AddScoped<IRaceRepository, RaceRepository>();
+        services.AddScoped<IGetAllRaceUseCase, GetAllRaceUseCase>();
         return services;
     }
 }
