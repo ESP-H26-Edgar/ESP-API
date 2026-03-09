@@ -58,6 +58,7 @@ public class Program
             });
 
             var app = builder.Build();
+            app.UseStaticFiles();
             app.UseCors("AllowReact");
 
             if (app.Environment.IsDevelopment())
