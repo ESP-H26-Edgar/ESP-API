@@ -27,6 +27,7 @@ public class Program
         });
 
         var app = builder.Build();
+        app.UseCors("AllowReact");
 
         if (app.Environment.IsDevelopment())
         {
@@ -34,7 +35,6 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseCors("AllowReact");
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
