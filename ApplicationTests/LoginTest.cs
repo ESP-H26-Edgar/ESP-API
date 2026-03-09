@@ -1,6 +1,5 @@
 ﻿using System;
 using ESP.Application.DTOS;
-using ESP.Application.Exceptions;
 using ESP.Application.UseCases;
 using ESP.Application.Validators;
 using ESP.Domain.Interfaces.Repositories;
