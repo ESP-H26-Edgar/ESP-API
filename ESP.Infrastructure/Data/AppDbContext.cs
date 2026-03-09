@@ -42,7 +42,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdComment).HasName("PRIMARY");
 
-            entity.ToTable("comments");
+            entity.ToTable("Comments");
 
             entity.HasIndex(e => e.IdRace, "IdRace");
 
@@ -63,7 +63,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRace).HasName("PRIMARY");
 
-            entity.ToTable("races");
+            entity.ToTable("Races");
 
             entity.HasIndex(e => e.IdRaceType, "IdRaceType");
 
@@ -86,7 +86,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRaceType).HasName("PRIMARY");
 
-            entity.ToTable("racetypes");
+            entity.ToTable("Racetypes");
 
             entity.Property(e => e.IdRaceType).HasColumnType("int(11)");
             entity.Property(e => e.RaceType1)
@@ -98,7 +98,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRegistration).HasName("PRIMARY");
 
-            entity.ToTable("registrations");
+            entity.ToTable("Registrations");
 
             entity.HasIndex(e => e.IdRace, "IdRace");
 
@@ -124,7 +124,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdResult).HasName("PRIMARY");
 
-            entity.ToTable("results");
+            entity.ToTable("Results");
 
             entity.HasIndex(e => e.IdRace, "IdRace");
 
@@ -150,7 +150,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdUser).HasName("PRIMARY");
 
-            entity.ToTable("users");
+            entity.ToTable("Users");
 
             entity.HasIndex(e => e.Mail, "Mail").IsUnique();
 
