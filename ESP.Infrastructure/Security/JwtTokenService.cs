@@ -28,6 +28,8 @@ namespace ESP.Infrastructure.Security
         public string GenerateToken(string mail, bool isAdmin)
         {
             var jwtKey = _config["Jwt:Key"]!;
+            var jwtIssuer = _config["Jwt:Issuer"]!;
+            var jwtAudience = _config["Jwt:Audience"]!;
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
@@ -38,6 +40,8 @@ namespace ESP.Infrastructure.Security
         };
 
             var token = new JwtSecurityToken(
+                issuer: jwtIssuer,
+                audience: jwtAudience,
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(
                     int.Parse(_config["Jwt:ExpiresMinutes"] ?? "60")),
