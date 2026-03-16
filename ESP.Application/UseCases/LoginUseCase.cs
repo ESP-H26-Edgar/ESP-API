@@ -46,7 +46,7 @@ namespace ESP.Application.UseCases
             if (!password)
                 throw new Exception("Invalid  password");
 
-            return _jwtTokenService.GenerateToken(user.Mail, user.IsAdmin);
+            return _jwtTokenService.GenerateToken(user.Mail, user.IsAdmin, user.IdUser);
         }
 
         public string GenerateToken(string mail, bool isAdmin)
