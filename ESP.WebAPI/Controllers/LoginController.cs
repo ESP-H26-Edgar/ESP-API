@@ -33,8 +33,8 @@ namespace ESP.API.Controllers
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,        
-                    Secure = true,          
-                    SameSite = SameSiteMode.Strict, 
+                    Secure = true,
+                    SameSite = SameSiteMode.None,
                     Expires = DateTimeOffset.UtcNow.AddHours(8)
                 };
 
