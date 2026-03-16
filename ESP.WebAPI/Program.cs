@@ -46,7 +46,7 @@ public class Program
             {
                 OnMessageReceived = context =>
                 {
-                    context.Token = context.Request.Cookies["token"];
+                    context.Token = context.Request.Cookies["auth_token"];
                     return Task.CompletedTask;
                 }
             };

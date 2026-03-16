@@ -2,6 +2,7 @@
 using ESP.Application.DTOS;
 using ESP.Application.UseCases;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESP.API.Controllers
@@ -17,6 +18,10 @@ namespace ESP.API.Controllers
         {
             _loginUseCase = loginUseCase;
         }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult Me() => Ok();
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
