@@ -1,0 +1,42 @@
+﻿using ESP.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ESP.Infrastructure.Repositories
+{
+    public class InscriptionRepository : IInscriptionRepository
+    {
+        private readonly AppDbContext _db;
+
+        public InscriptionRepository(AppDbContext db)
+        {
+            _db = db;
+        }
+
+        public async Task AddAsync(Registration registration)
+            => await _db.Registrations.AddAsync(registration);
+
+        public async Task SaveChangesAsync()
+            => await _db.SaveChangesAsync();
+
+        // Vérifie si l'user est déjà inscrit à cette course
+        // (contrainte unique IdUser + IdRace dans ta BDD)
+        public async Task<bool> AlreadyExistsAsync(int idUser, int idRace)
+            => await _db.Registrations
+                .AnyAsync(r => r.IdUser == idUser && r.IdRace == idRace);
+
+        // Génère un numero de dossard unique pour cette course
+        public async Task<int> GenerateBibNumberAsync(int idRace)
+        {
+            var max = await _db.Registrations
+                .Where(r => r.IdRace == idRace)
+                .MaxAsync(r => (int?)r.BibNumber) ?? 0;
+
+            return max + 1;
+        }
+    }
+}

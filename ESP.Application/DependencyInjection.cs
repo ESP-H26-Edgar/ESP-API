@@ -26,6 +26,12 @@ public static class DependencyInjection
 
         services.AddScoped<IRaceRepository, RaceRepository>();
         services.AddScoped<IGetAllRaceUseCase, GetAllRaceUseCase>();
+
+        services.AddScoped<IInscriptionRepository, InscriptionRepository>();
+        services.AddScoped<IStripeService, StripeService>();
+        services.AddScoped<CreationPayementUseCase>();
+        services.AddScoped<InscriptionCourseUseCase>();
+
         return services;
     }
 }
