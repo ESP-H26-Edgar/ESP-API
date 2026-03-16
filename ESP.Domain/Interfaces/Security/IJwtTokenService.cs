@@ -8,6 +8,6 @@ namespace ESP.Domain.Interfaces.Security
 {
     public interface IJwtTokenService
     {
-        string GenerateToken(string mail, bool isAdmin);
+        string GenerateToken(string mail, bool isAdmin, int idUser);
     }
 }
