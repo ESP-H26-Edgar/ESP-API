@@ -46,7 +46,14 @@ public class Program
             {
                 OnMessageReceived = context =>
                 {
-                    context.Token = context.Request.Cookies["auth_token"];
+                    var token = context.Request.Cookies["auth_token"];
+                    Console.WriteLine("COOKIE TOKEN: " + token);
+
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        context.Token = token;
+                    }
+
                     return Task.CompletedTask;
                 }
             };
