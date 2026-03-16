@@ -24,7 +24,7 @@ namespace ESP.API.Controllers
         public IActionResult Me() => Ok();
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             try
             {
