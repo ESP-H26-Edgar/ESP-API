@@ -21,7 +21,13 @@ namespace ESP.API.Controllers
 
         [Authorize]
         [HttpGet("me")]
-        public IActionResult Me() => Ok();
+        public IActionResult Me()
+        {
+            var idUserClaim = User.Claims.FirstOrDefault(c => c.Type == "idUser");
+            if (idUserClaim == null) return Unauthorized();
+
+            return Ok(new { idUser = int.Parse(idUserClaim.Value) });
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
