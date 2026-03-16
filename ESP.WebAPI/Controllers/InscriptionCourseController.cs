@@ -1,9 +1,12 @@
-﻿using ESP.Application.UseCases;
+﻿using ESP.Application.DTOS;
+using ESP.Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace ESP.Application.DTOS
+namespace ESP.WebAPI.DTOS
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class InscriptionCourseController : ControllerBase
     {
         private readonly CreationPayementUseCase _creationPayementUseCase;
