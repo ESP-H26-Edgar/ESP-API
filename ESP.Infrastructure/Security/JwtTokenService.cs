@@ -25,7 +25,7 @@ namespace ESP.Infrastructure.Security
             _config = config;
         }
         // aide de chat gpt pour le gestion du token JWT
-        public string GenerateToken(string mail, bool isAdmin)
+        public string GenerateToken(string mail, bool isAdmin, int idUser)
         {
             var jwtKey = _config["Jwt:Key"]!;
             var jwtIssuer = _config["Jwt:Issuer"]!;
@@ -38,8 +38,9 @@ namespace ESP.Infrastructure.Security
             var claims = new[]
             {
             new Claim(ClaimTypes.Email, mail),
-            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User")
-        };
+            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User"),
+            new Claim("idUser", idUser.ToString())
+        };  
 
             var token = new JwtSecurityToken(
                 issuer: jwtIssuer,
