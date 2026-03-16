@@ -26,6 +26,7 @@ namespace ESP.Application.DTOS
         public int NumberPlace { get; set; }
 
         public string Image { get; set; } = null!;
+        public decimal Price { get; set; }
         public RaceDto() { }
 
         public RaceDto(Race race)
@@ -39,6 +40,7 @@ namespace ESP.Application.DTOS
             Description = race.Description;
             NumberPlace = race.NumberPlace;
             Image = race.Image;
+            Price = race.Price;
         }
     }
 }
