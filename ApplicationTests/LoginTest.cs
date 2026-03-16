@@ -55,7 +55,7 @@ public class LoginTest
             .Returns(true);
 
         _jwtTokenServiceMock
-            .Setup(x => x.GenerateToken(user.Mail, user.IsAdmin))
+            .Setup(x => x.GenerateToken(user.Mail, user.IsAdmin, user.IdUser))
             .Returns("fakeToken");
 
         var result = await _loginUseCase.Execute(dto);
