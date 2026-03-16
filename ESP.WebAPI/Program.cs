@@ -18,7 +18,10 @@ public class Program
         {
             options.AddPolicy("AllowReact",
                 policy => policy
-                    .WithOrigins("http://localhost:5173")
+                    .WithOrigins(
+                    "http://localhost:5173",
+                    "https://raceportal.edwrdledgar.me")
+
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials());
