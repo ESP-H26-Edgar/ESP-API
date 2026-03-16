@@ -1,5 +1,7 @@
 ﻿using ESP.Domain.Interfaces.Repositories;
+using ESP.Domain.Interfaces.Security;
 using ESP.Infrastructure.Repositories;
+using ESP.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,7 @@ public static class DependencyInjection
             ));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IStripeService, StripeService>();
         return services;
     }
 }

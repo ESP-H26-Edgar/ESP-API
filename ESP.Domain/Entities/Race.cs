@@ -22,6 +22,7 @@ public partial class Race
     public int NumberPlace { get; set; }
 
     public string Image { get; set; } = null!;
+    public decimal Price { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
