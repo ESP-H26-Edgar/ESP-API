@@ -31,6 +31,8 @@ namespace ESP.Infrastructure.Security
             var jwtIssuer = _config["Jwt:Issuer"]!;
             var jwtAudience = _config["Jwt:Audience"]!;
 
+            Console.WriteLine("AUDIENCE = " + jwtAudience);
+            Console.WriteLine("ISSUER = " + jwtIssuer);
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
             var claims = new[]
