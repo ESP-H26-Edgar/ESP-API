@@ -20,8 +20,8 @@ namespace ESP.Application.UseCases
 
         public async Task<IList<RaceDto>> Execute()
         {
-            var todos = await _raceRepository.GetAllRaces();
-            return todos.Select(x => new RaceDto(x)).ToList();
+            var races = await _raceRepository.GetAllRaces(); 
+            return races.Select(x => new RaceDto(x)).ToList();
         }
     }
 }
