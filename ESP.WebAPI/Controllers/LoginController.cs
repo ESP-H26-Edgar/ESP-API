@@ -4,6 +4,7 @@ using ESP.Application.UseCases;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ESP.API.Controllers
 {
@@ -26,7 +27,13 @@ namespace ESP.API.Controllers
             var idUserClaim = User.Claims.FirstOrDefault(c => c.Type == "idUser");
             if (idUserClaim == null) return Unauthorized();
 
-            return Ok(new { idUser = int.Parse(idUserClaim.Value) });
+            var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            return Ok(new
+            {
+                idUser = int.Parse(idUserClaim.Value),
+                role
+            });
         }
 
         [HttpPost]
