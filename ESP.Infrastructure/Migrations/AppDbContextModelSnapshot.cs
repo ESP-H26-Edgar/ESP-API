@@ -266,15 +266,9 @@ namespace ESP.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("registrations_ibfk_2");
 
-                    b.HasOne("ESP.Infrastructure.User", "IdUserNavigation")
-                        .WithMany("Registrations")
-                        .HasForeignKey("IdUser")
-                        .IsRequired()
-                        .HasConstraintName("registrations_ibfk_1");
 
                     b.Navigation("IdRaceNavigation");
 
-                    b.Navigation("IdUserNavigation");
                 });
 
             modelBuilder.Entity("ESP.Infrastructure.Result", b =>
@@ -285,15 +279,8 @@ namespace ESP.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("results_ibfk_2");
 
-                    b.HasOne("ESP.Infrastructure.User", "IdUserNavigation")
-                        .WithMany("Results")
-                        .HasForeignKey("IdUser")
-                        .IsRequired()
-                        .HasConstraintName("results_ibfk_1");
-
                     b.Navigation("IdRaceNavigation");
 
-                    b.Navigation("IdUserNavigation");
                 });
 
             modelBuilder.Entity("ESP.Infrastructure.Race", b =>

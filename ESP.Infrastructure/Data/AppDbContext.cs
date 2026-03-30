@@ -132,10 +132,6 @@ public partial class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("results_ibfk_2");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Results)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("results_ibfk_1");
         });
 
         modelBuilder.Entity<User>(entity =>
