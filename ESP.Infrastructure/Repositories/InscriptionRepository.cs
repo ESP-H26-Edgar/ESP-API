@@ -42,5 +42,12 @@ namespace ESP.Infrastructure.Repositories
                 r.AdresseMail == email
             );
         }
+        public async Task<IEnumerable<Registration>> GetAllAsync()
+        => await _db.Registrations.ToListAsync();
+
+        public async Task<IEnumerable<Registration>> GetByRaceAsync(int idRace)
+            => await _db.Registrations
+                .Where(r => r.IdRace == idRace)
+                .ToListAsync();
     }
 }

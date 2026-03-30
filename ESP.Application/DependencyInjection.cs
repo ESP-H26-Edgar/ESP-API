@@ -31,6 +31,7 @@ public static class DependencyInjection
         services.AddScoped<IStripeService, StripeService>();
         services.AddScoped<CreationPayementUseCase>();
         services.AddScoped<InscriptionCourseUseCase>();
+        services.AddScoped<GetInscriptionsUseCase>();
 
         return services;
     }
