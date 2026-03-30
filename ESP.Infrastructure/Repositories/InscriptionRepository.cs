@@ -38,5 +38,16 @@ namespace ESP.Infrastructure.Repositories
 
             return max + 1;
         }
+        public async Task<bool> AlreadyExistsAsync(int idUser, int idRace, string nom, string prenom, DateOnly dateNaissance, string email)
+        {
+            return await _db.Registrations.AnyAsync(r =>
+                r.IdUser == idUser &&
+                r.IdRace == idRace &&
+                r.Nom == nom &&
+                r.Prenom == prenom &&
+                r.DateNaissance == dateNaissance &&
+                r.AdresseMail == email
+            );
+        }
     }
 }
