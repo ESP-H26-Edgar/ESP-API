@@ -49,7 +49,6 @@ namespace ApplicationTests
             _inscriptionRepositoryMock
             .Setup(x => x.AlreadyExistsAsync(
                 It.IsAny<int>(),
-                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<DateOnly>(),
