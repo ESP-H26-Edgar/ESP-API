@@ -33,18 +33,18 @@
 ```bash
     {
       "ConnectionStrings": {
-        "DefaultConnection": "server=127.0.0.1;port=3306;database=raceportal;user=apiuser;password=ApiPass10!"
+        "DefaultConnection": "DBconnectionString"
       },
       "Jwt": {
-        "Key": "D452qs456453qsdKBHFWXDHds241FExtra",
-        "Issuer": "https://raceportal.edwrdledgar.me",
-        "Audience": "https://raceportal.edwrdledgar.me",
+        "Key": "jwtKey",
+        "Issuer": "Server url",
+        "Audience": "Server url",
         "ExpiresMinutes": "60"
       },
 
       "Stripe": {
-        "SecretKey": "sk_test_51TBeigE7cDC4ZOdEYvkoXESwAwjMijcghoTrwOsm8CLR79ncyhaBHtAmCOE3zW84yzVGE9qd8c6ZKLpHJQmk1cqu00XUXIBq18",
-        "WebhookSecret": "whsec_5Z3M5DmXZXujalGGsoUncohxwAvVEuO6"
+        "SecretKey": "secretKey",
+        "WebhookSecret": "webhook"
       },
 
 
