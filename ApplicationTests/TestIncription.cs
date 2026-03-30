@@ -48,8 +48,15 @@ namespace ApplicationTests
                 .ReturnsAsync(metadata);
 
             _inscriptionRepositoryMock
-                .Setup(x => x.AlreadyExistsAsync(1, 1))
-                .ReturnsAsync(false);
+            .Setup(x => x.AlreadyExistsAsync(
+                It.IsAny<int>(),
+                It.IsAny<int>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<DateOnly>(),
+                It.IsAny<string>()
+            ))
+            .ReturnsAsync(false);
 
             _inscriptionRepositoryMock
                 .Setup(x => x.GenerateBibNumberAsync(1))
