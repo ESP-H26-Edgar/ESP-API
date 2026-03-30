@@ -23,6 +23,5 @@ public partial class Registration
 
     public virtual Race IdRaceNavigation { get; set; } = null!;
 
-    public virtual User IdUserNavigation { get; set; } = null!;
 }
 
