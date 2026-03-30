@@ -39,7 +39,6 @@ namespace ApplicationTests
 
             var metadata = new Dictionary<string, string>
                 {
-                 { "idUser", "1" },
                  { "idRace", "1" }
                 };
 
@@ -66,7 +65,6 @@ namespace ApplicationTests
 
             _inscriptionRepositoryMock.Verify(
                 x => x.AddAsync(It.Is<Registration>(r =>
-                    r.IdUser == 1 &&
                     r.IdRace == 1 &&
                     r.BibNumber == 42
                 )),

@@ -6,7 +6,6 @@ namespace ESP.Infrastructure;
 public partial class Registration
 {
     public int IdRegistration { get; set; }
-    public int IdUser { get; set; }
 
     public int IdRace { get; set; }
 

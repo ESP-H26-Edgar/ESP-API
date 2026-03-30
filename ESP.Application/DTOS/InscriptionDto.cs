@@ -9,7 +9,6 @@ namespace ESP.Application.DTOS
     public class InscriptionDto
     {
         public int IdRace { get; set; }
-        public int IdUser { get; set; }
         public decimal Price { get; set; }
 
         public string Prenom { get; set; } = null!;
