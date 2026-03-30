@@ -38,8 +38,14 @@ namespace ESP.Application.UseCases
             var sexe = metaNormalized["sexe"];
             var dateNaissance = DateOnly.Parse(metaNormalized["datenaissance"]);
 
-            var exists = await _inscriptionRepository.AlreadyExistsAsync(idUser, idRace);
-            if (exists) return;
+            bool exists = await _inscriptionRepository.AlreadyExistsAsync(
+                idUser, idRace, nom, prenom, dateNaissance, adresseMail
+             );
+            if (exists)
+            {
+                Console.WriteLine("Cette personne est déjà inscrite pour cette course.");
+                return;
+            }
 
             var bibNumber = await _inscriptionRepository.GenerateBibNumberAsync(idRace);
 
