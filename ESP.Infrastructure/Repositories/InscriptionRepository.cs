@@ -23,12 +23,6 @@ namespace ESP.Infrastructure.Repositories
         public async Task SaveChangesAsync()
             => await _db.SaveChangesAsync();
 
-        // Vérifie si l'user est déjà inscrit à cette course
-        // (contrainte unique IdUser + IdRace dans ta BDD)
-        public async Task<bool> AlreadyExistsAsync(int idUser, int idRace)
-            => await _db.Registrations
-                .AnyAsync(r => r.IdUser == idUser && r.IdRace == idRace);
-
         // Génère un numero de dossard unique pour cette course
         public async Task<int> GenerateBibNumberAsync(int idRace)
         {
@@ -38,10 +32,9 @@ namespace ESP.Infrastructure.Repositories
 
             return max + 1;
         }
-        public async Task<bool> AlreadyExistsAsync(int idUser, int idRace, string nom, string prenom, DateOnly dateNaissance, string email)
+        public async Task<bool> AlreadyExistsAsync( int idRace, string nom, string prenom, DateOnly dateNaissance, string email)
         {
             return await _db.Registrations.AnyAsync(r =>
-                r.IdUser == idUser &&
                 r.IdRace == idRace &&
                 r.Nom == nom &&
                 r.Prenom == prenom &&
