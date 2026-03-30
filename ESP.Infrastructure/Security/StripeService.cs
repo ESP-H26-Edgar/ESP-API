@@ -19,7 +19,7 @@ public class StripeService : IStripeService
     //appelle l'api Stripe et créer un payement
     //Stock idUser + idRace
     //retourne un clientSecret au front
-    public async Task<string> CreatePaymentIntentAsync(int idRace, int idUser, decimal price, string prenom, string nom, string adreseMail, string phone, string sexe, DateOnly dateNaissance )
+    public async Task<string> CreatePaymentIntentAsync(int idRace, decimal price, string prenom, string nom, string adreseMail, string phone, string sexe, DateOnly dateNaissance )
     {
         var options = new PaymentIntentCreateOptions
         {
@@ -28,7 +28,6 @@ public class StripeService : IStripeService
             Metadata = new Dictionary<string, string>
             {
                 { "idRace", idRace.ToString() },
-                { "idUser", idUser.ToString() },
                 { "Prenom", prenom },
                 { "Nom", nom },
                 { "AdresseMail", adreseMail },
