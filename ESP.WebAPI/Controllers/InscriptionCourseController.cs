@@ -11,13 +11,16 @@ namespace ESP.WebAPI.DTOS
     {
         private readonly CreationPayementUseCase _creationPayementUseCase;
         private readonly InscriptionCourseUseCase _incriptionCourseUseCase;
+        private readonly GetInscriptionsUseCase _getInscriptionsUseCase;
 
         public InscriptionCourseController(
-            CreationPayementUseCase creationPayementUseCase,
-            InscriptionCourseUseCase incriptionCourseUseCase)
+               CreationPayementUseCase creationPayementUseCase,
+               InscriptionCourseUseCase incriptionCourseUseCase,
+               GetInscriptionsUseCase getInscriptionsUseCase)
         {
             _creationPayementUseCase = creationPayementUseCase;
             _incriptionCourseUseCase = incriptionCourseUseCase;
+            _getInscriptionsUseCase = getInscriptionsUseCase;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
