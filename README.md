@@ -1,6 +1,6 @@
  # RacePortal
 
- > Application codée en C# pour la back-end avec une API .NET, en React pour le front-end. 
+ > Application codée en C# pour la back-end avec une API en .NET
  
  # Prérequis
  
@@ -28,21 +28,57 @@
      sudo systemctl enable nginx
   ```
 
- # Demarage du serveur en dev :
-  Front-end : 
+## Ajout important 
+   1. Ajout du fichier .env à la racine du projet
+      ```bash
+      DB_HOST=(Votre ip)
+      DB_PORT=(Votre port)
+      DB_NAME=(votre nom de base de données)
+      DB_USER=(votre user)
+      DB_PASSWORD=(votre mot de passe)
+      ```
+   3. Ajout du fichier appsetting.json dans le dossier /ESP.API
+       ```bash
+       {
+      "ConnectionStrings": {
+          "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
+      },
+      "Jwt": {
+          "Key": "(Votre TokenJWT ici)",
+          "ExpiresMinutes": "60"
+      },
+      "Logging": {
+          "LogLevel": {
+              "Default": "Information",
+              "Microsoft.AspNetCore": "Warning"
+          }
+      },
+      "AllowedHosts": "*"
+       }
+       ```
+
+ 4. Ajoute le package jwt
    ```bash
-     npm run dev
+     cd /var/www/ESP/ESP-API/ESP.WebAPI
+     dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
    ```
+   Il peut y avoir des problèmes de dépendances si cela arrive, ajouter les dépendances suivantes : 
+   ```bash
+     cd /var/www/ESP/ESP-API/ESP.WebAPI
+     dotnet add package System.IdentityModel.Tokens.Jwt --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Tokens --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Protocols --version 7.1.2
+     dotnet add package Microsoft.IdentityModel.Logging --version 7.1.2
+
+   ```
+ # Demarage du serveur en dev :
    Back-end :
    ```bash
      dotnet run
    ```
 
  # Demarage du serveur en prod :
-  Front-end : 
-   ```bash
-     npm run build
-   ```
    Back-end :
    ```bash
      sudo systemctl start (nom de l'api)

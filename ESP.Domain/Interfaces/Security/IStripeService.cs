@@ -9,7 +9,7 @@ namespace ESP.Domain.Interfaces.Security
 
     public interface IStripeService
     {
-        Task<string> CreatePaymentIntentAsync(int idRace, int idUser, decimal price);
+        Task<string> CreatePaymentIntentAsync(int idRace, int idUser, decimal price, string prenom, string nom, string adresseMail, string Phone, string sexe, DateOnly dateNaissance );
         Task<Dictionary<string, string>?> VerifyAndExtractAsync(string json, string signature);
     }
 }

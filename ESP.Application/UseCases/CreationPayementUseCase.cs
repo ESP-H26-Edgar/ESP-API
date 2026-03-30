@@ -22,7 +22,16 @@ namespace ESP.Application.UseCases
 
         public async Task<string> ExecuteAsync(InscriptionDto dto)
         {
-            return await _stripeService.CreatePaymentIntentAsync(dto.IdRace,dto.IdUser,dto.Price);
+            return await _stripeService.CreatePaymentIntentAsync(
+        dto.IdRace,
+        dto.IdUser,
+        dto.Price,
+        dto.Prenom,
+        dto.Nom,
+        dto.AdresseMail,
+        dto.Phone,
+        dto.Sexe,
+        dto.DateNaissance);
         }
     }
 }

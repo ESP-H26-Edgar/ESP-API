@@ -27,20 +27,22 @@ jobs:
           IP_VM: ${{ secrets.IP_VM }}
         run: |
           ssh -o StrictHostKeyChecking=no $USER_VM@$IP_VM "
+            export PATH=\$HOME/.dotnet:\$PATH
             set -e
             rm -rf /var/www/ESP/ESP-API
             mkdir -p /var/www/ESP/ESP-API
             cd /var/www/ESP/ESP-API
-
+          
             git clone https://github.com/ESP-H26-Edgar/ESP-API.git .
-                        
+          
             git fetch origin main
             git reset --hard origin/main
-            
+          
             dotnet restore
             dotnet publish -c Release -o /var/www/ESP/ESP-API/publish
-
+            cp /var/www/ESP/appsettings.json /var/www/ESP/ESP-API/publish/appsettings.json
+            cp /var/www/ESP/.env /var/www/ESP/ESP-API/publish/.env
+          
             # Redémarrer le service systemd
             sudo systemctl restart esp-api
-            
           "

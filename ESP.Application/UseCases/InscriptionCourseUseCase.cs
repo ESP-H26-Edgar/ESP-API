@@ -29,10 +29,23 @@ namespace ESP.Application.UseCases
 
             var idUser = int.Parse(metadata["idUser"]);
             var idRace = int.Parse(metadata["idRace"]);
+            var metaNormalized = metadata.ToDictionary(k => k.Key.ToLower(), v => v.Value);
 
+            var prenom = metaNormalized["prenom"];
+            var nom = metaNormalized["nom"];
+            var adresseMail = metaNormalized["adressemail"];
+            var phone = metaNormalized["phone"];
+            var sexe = metaNormalized["sexe"];
+            var dateNaissance = DateOnly.Parse(metaNormalized["datenaissance"]);
 
-            var exists = await _inscriptionRepository.AlreadyExistsAsync(idUser, idRace);
-            if (exists) return;
+            bool exists = await _inscriptionRepository.AlreadyExistsAsync(
+                idUser, idRace, nom, prenom, dateNaissance, adresseMail
+             );
+            if (exists)
+            {
+                Console.WriteLine("Cette personne est déjà inscrite pour cette course.");
+                return;
+            }
 
             var bibNumber = await _inscriptionRepository.GenerateBibNumberAsync(idRace);
 
@@ -40,7 +53,14 @@ namespace ESP.Application.UseCases
             {
                 IdUser = idUser,
                 IdRace = idRace,
+
                 BibNumber = bibNumber,
+                Nom = nom,
+                Prenom = prenom,
+                AdresseMail = adresseMail,
+                Sexe = sexe,
+                DateNaissance = dateNaissance,
+                Phone = phone,
             };
 
             await _inscriptionRepository.AddAsync(registration);

@@ -11,5 +11,12 @@ namespace ESP.Application.DTOS
         public int IdRace { get; set; }
         public int IdUser { get; set; }
         public decimal Price { get; set; }
+
+        public string Prenom { get; set; } = null!;
+        public string Nom { get; set; } = null!;
+        public string AdresseMail { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public string Sexe { get; set; } = null!;
+        public DateOnly DateNaissance { get; set; }
     }
 }
