@@ -25,4 +25,4 @@ public partial class Registration
 
     public virtual User IdUserNavigation { get; set; } = null!;
 }
-}
+
