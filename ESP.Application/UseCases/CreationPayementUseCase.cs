@@ -24,7 +24,6 @@ namespace ESP.Application.UseCases
         {
             return await _stripeService.CreatePaymentIntentAsync(
         dto.IdRace,
-        dto.IdUser,
         dto.Price,
         dto.Prenom,
         dto.Nom,
