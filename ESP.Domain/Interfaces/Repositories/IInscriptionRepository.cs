@@ -12,7 +12,6 @@ namespace ESP.Domain.Interfaces.Repositories
         Task AddAsync(Registration registration);
         Task SaveChangesAsync();
         Task<bool> AlreadyExistsAsync(
-            int idUser,
             int idRace,
             string nom,
             string prenom,
@@ -20,6 +19,6 @@ namespace ESP.Domain.Interfaces.Repositories
             string adresseMail
         );
 
-        Task<int> GenerateBibNumberAsync(int idUser);
+        Task<int> GenerateBibNumberAsync(int idRace);
     }
 }

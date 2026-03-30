@@ -27,7 +27,6 @@ namespace ESP.Application.UseCases
             var metadata = await _stripeService.VerifyAndExtractAsync(json, signature);
             if (metadata == null) return;
 
-            var idUser = int.Parse(metadata["idUser"]);
             var idRace = int.Parse(metadata["idRace"]);
             var metaNormalized = metadata.ToDictionary(k => k.Key.ToLower(), v => v.Value);
 
@@ -39,7 +38,7 @@ namespace ESP.Application.UseCases
             var dateNaissance = DateOnly.Parse(metaNormalized["datenaissance"]);
 
             bool exists = await _inscriptionRepository.AlreadyExistsAsync(
-                idUser, idRace, nom, prenom, dateNaissance, adresseMail
+                idRace, nom, prenom, dateNaissance, adresseMail
              );
             if (exists)
             {
@@ -51,7 +50,6 @@ namespace ESP.Application.UseCases
 
             var registration = new Registration
             {
-                IdUser = idUser,
                 IdRace = idRace,
 
                 BibNumber = bibNumber,

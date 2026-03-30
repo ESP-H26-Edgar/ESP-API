@@ -17,7 +17,7 @@ public class StripeService : IStripeService
     }
 
     //appelle l'api Stripe et créer un payement
-    //Stock idUser + idRace
+    //Stock idRace
     //retourne un clientSecret au front
     public async Task<string> CreatePaymentIntentAsync(int idRace, decimal price, string prenom, string nom, string adreseMail, string phone, string sexe, DateOnly dateNaissance )
     {
@@ -41,7 +41,6 @@ public class StripeService : IStripeService
         var intent = await service.CreateAsync(options);
         return intent.ClientSecret;
     }
-    //Vérifie sur le payement est bien validé, si c'est le cas il retourne idUser et idRace
     public Task<Dictionary<string, string>?> VerifyAndExtractAsync(
         string json, string signature)
     {
