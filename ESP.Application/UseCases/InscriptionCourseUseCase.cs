@@ -29,7 +29,12 @@ namespace ESP.Application.UseCases
 
             var idUser = int.Parse(metadata["idUser"]);
             var idRace = int.Parse(metadata["idRace"]);
-
+            var prenom = metadata["Prenom"];
+            var nom = metadata["Nom"];
+            var adresseMail = metadata["AdresseMail"];
+            var phone = metadata["Phone"];
+            var sexe = metadata["Sexe"];
+            var dateNaissance = DateOnly.Parse(metadata["DateNaissance"]);
 
             var exists = await _inscriptionRepository.AlreadyExistsAsync(idUser, idRace);
             if (exists) return;
@@ -40,7 +45,14 @@ namespace ESP.Application.UseCases
             {
                 IdUser = idUser,
                 IdRace = idRace,
+
                 BibNumber = bibNumber,
+                Prenom = prenom,
+                Nom = nom,
+                AdresseMail = adresseMail,
+                Phone = phone,
+                Sexe = sexe,
+                DateNaissance = dateNaissance
             };
 
             await _inscriptionRepository.AddAsync(registration);
