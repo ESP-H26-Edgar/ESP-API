@@ -2,6 +2,7 @@
 using ESP.Domain.Interfaces.Repositories;
 using ESP.Domain.Interfaces.Security;
 using ESP.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace ESP.Application.UseCases
 {
@@ -13,13 +14,16 @@ namespace ESP.Application.UseCases
         //récupère idUser et idRace, il génére un numéro de dossrd et insert dans la base de données
         private readonly IInscriptionRepository _inscriptionRepository;
         private readonly IStripeService _stripeService;
+        private readonly ILogger<InscriptionCourseUseCase> _logger;
 
         public InscriptionCourseUseCase(
                IInscriptionRepository inscriptionRepository,
-               IStripeService stripeService)
+               IStripeService stripeService, ILogger<InscriptionCourseUseCase> logger)
         {
             _inscriptionRepository = inscriptionRepository;
             _stripeService = stripeService;
+            _stripeService = stripeService;
+            _logger = logger;
         }
 
         public async Task ExecuteAsync(string json, string signature)
@@ -65,6 +69,7 @@ namespace ESP.Application.UseCases
 
             await _inscriptionRepository.AddAsync(registration);
             await _inscriptionRepository.SaveChangesAsync();
+            _logger.LogInformation("Nouvelle inscription ajoutée : {Nom} {Prenom}, BibNumber {BibNumber}", nom, prenom, bibNumber);
         }
     }
 }
