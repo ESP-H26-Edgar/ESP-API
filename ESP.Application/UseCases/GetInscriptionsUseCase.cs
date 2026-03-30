@@ -24,3 +24,4 @@ namespace ESP.Application.UseCases
             => await _repository.GetByRaceAsync(idRace);
 
     }
+}
