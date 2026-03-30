@@ -100,22 +100,16 @@ public partial class AppDbContext : DbContext
 
             entity.HasIndex(e => e.IdRace, "IdRace");
 
-            entity.HasIndex(e => new { e.IdUser, e.IdRace }, "IdUser").IsUnique();
 
             entity.Property(e => e.IdRegistration).HasColumnType("int(11)");
             entity.Property(e => e.BibNumber).HasColumnType("int(11)");
             entity.Property(e => e.IdRace).HasColumnType("int(11)");
-            entity.Property(e => e.IdUser).HasColumnType("int(11)");
 
             entity.HasOne(d => d.IdRaceNavigation).WithMany(p => p.Registrations)
                 .HasForeignKey(d => d.IdRace)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("registrations_ibfk_2");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Registrations)
-                .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("registrations_ibfk_1");
         });
 
         modelBuilder.Entity<Result>(entity =>
