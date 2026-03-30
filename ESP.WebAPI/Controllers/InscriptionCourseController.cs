@@ -19,7 +19,12 @@ namespace ESP.WebAPI.DTOS
             _creationPayementUseCase = creationPayementUseCase;
             _incriptionCourseUseCase = incriptionCourseUseCase;
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var inscriptions = await _getInscriptionsUseCase.ExecuteAsync();
+            return Ok(inscriptions);
+        }
         [HttpPost("initier-paiement")]
         public async Task<IActionResult> CreateCheckoutSession(
         [FromBody] InscriptionDto dto)
