@@ -29,33 +29,34 @@
   ```
 
 ## Ajout important 
-   1. Ajout du fichier .env à la racine du projet
-      ```bash
-      DB_HOST=(Votre ip)
-      DB_PORT=(Votre port)
-      DB_NAME=(votre nom de base de données)
-      DB_USER=(votre user)
-      DB_PASSWORD=(votre mot de passe)
-      ```
-   3. Ajout du fichier appsetting.json dans le dossier /ESP.API
-       ```bash
-       {
-      "ConnectionStrings": {
-          "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
-      },
-      "Jwt": {
-          "Key": "(Votre TokenJWT ici)",
-          "ExpiresMinutes": "60"
-      },
-      "Logging": {
-          "LogLevel": {
-              "Default": "Information",
-              "Microsoft.AspNetCore": "Warning"
-          }
-      },
-      "AllowedHosts": "*"
+   Ajout du fichier appsetting.json dans le dossier /ESP.API
+     ```bash
+           {
+     "ConnectionStrings": {
+       "DefaultConnection": "server=127.0.0.1;port=3306;database=raceportal;user=apiuser;password=ApiPass10!"
+     },
+     "Jwt": {
+       "Key": "D452qs456453qsdKBHFWXDHds241FExtra",
+       "Issuer": "https://raceportal.edwrdledgar.me",
+       "Audience": "https://raceportal.edwrdledgar.me",
+       "ExpiresMinutes": "60"
+     },
+   
+     "Stripe": {
+       "SecretKey": "sk_test_51TBeigE7cDC4ZOdEYvkoXESwAwjMijcghoTrwOsm8CLR79ncyhaBHtAmCOE3zW84yzVGE9qd8c6ZKLpHJQmk1cqu00XUXIBq18",
+       "WebhookSecret": "whsec_5Z3M5DmXZXujalGGsoUncohxwAvVEuO6"
+     },
+   
+   
+     "Logging": {
+       "LogLevel": {
+         "Default": "Information",
+         "Microsoft.AspNetCore": "Warning"
        }
-       ```
+     },
+     "AllowedHosts": "*"
+   }
+     ```
 
  4. Ajoute le package jwt
    ```bash
