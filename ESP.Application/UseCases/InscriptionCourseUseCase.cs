@@ -1,27 +1,25 @@
-﻿using ESP.Application.DTOS;
-using ESP.Domain.Interfaces.Repositories;
+﻿using ESP.Domain.Interfaces.Repositories;
 using ESP.Domain.Interfaces.Security;
 using ESP.Infrastructure;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ESP.Application.UseCases
 {
     public class InscriptionCourseUseCase
     {
-        //Aide de l'ia ici
-        //Cette partie est appelée après que Stipe revois les données de validations
-        //Le retour de Stripe est vérifié et validé. 
-        //récupère idUser et idRace, il génére un numéro de dossrd et insert dans la base de données
         private readonly IInscriptionRepository _inscriptionRepository;
         private readonly IStripeService _stripeService;
         private readonly ILogger<InscriptionCourseUseCase> _logger;
 
         public InscriptionCourseUseCase(
-               IInscriptionRepository inscriptionRepository,
-               IStripeService stripeService, ILogger<InscriptionCourseUseCase> logger)
+            IInscriptionRepository inscriptionRepository,
+            IStripeService stripeService,
+            ILogger<InscriptionCourseUseCase> logger)
         {
             _inscriptionRepository = inscriptionRepository;
-            _stripeService = stripeService;
             _stripeService = stripeService;
             _logger = logger;
         }
@@ -29,7 +27,11 @@ namespace ESP.Application.UseCases
         public async Task ExecuteAsync(string json, string signature)
         {
             var metadata = await _stripeService.VerifyAndExtractAsync(json, signature);
-            if (metadata == null) return;
+            if (metadata == null)
+            {
+                _logger.LogWarning("Stripe metadata was null");
+                return;
+            }
 
             var idRace = int.Parse(metadata["idRace"]);
             var metaNormalized = metadata.ToDictionary(k => k.Key.ToLower(), v => v.Value);
@@ -43,10 +45,10 @@ namespace ESP.Application.UseCases
 
             bool exists = await _inscriptionRepository.AlreadyExistsAsync(
                 idRace, nom, prenom, dateNaissance, adresseMail
-             );
+            );
             if (exists)
             {
-                Console.WriteLine("Cette personne est déjà inscrite pour cette course.");
+                _logger.LogInformation("Participant already registered: {Nom} {Prenom}", nom, prenom);
                 return;
             }
 
@@ -55,7 +57,6 @@ namespace ESP.Application.UseCases
             var registration = new Registration
             {
                 IdRace = idRace,
-
                 BibNumber = bibNumber,
                 Nom = nom,
                 Prenom = prenom,
@@ -67,7 +68,8 @@ namespace ESP.Application.UseCases
 
             await _inscriptionRepository.AddAsync(registration);
             await _inscriptionRepository.SaveChangesAsync();
-            _logger.LogInformation("Nouvelle inscription ajoutée : {Nom} {Prenom}, BibNumber {BibNumber}", nom, prenom, bibNumber);
+
+            _logger.LogInformation("New registration added: {Nom} {Prenom}, Bib #{BibNumber}", nom, prenom, bibNumber);
         }
     }
 }

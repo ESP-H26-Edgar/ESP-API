@@ -24,10 +24,10 @@ namespace ApplicationTests
             _inscriptionRepositoryMock = new Mock<IInscriptionRepository>();
             _stripeServiceMock = new Mock<IStripeService>();
             _loggerMock = new Mock<ILogger<InscriptionCourseUseCase>>();
-
             _inscriptionCourseUseCase = new InscriptionCourseUseCase(
                 _inscriptionRepositoryMock.Object,
-                _stripeServiceMock.Object
+                _stripeServiceMock.Object,
+                _loggerMock.Object
             );
         }
 
