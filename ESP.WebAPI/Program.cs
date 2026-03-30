@@ -8,7 +8,10 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
+        builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        builder.Logging.ClearProviders();
+        builder.Logging.AddConsole();
+        builder.Logging.AddDebug();
 
         builder.Services.AddControllers();
         builder.Services.AddApplication();
@@ -76,9 +79,7 @@ public class Program
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            builder.Logging.ClearProviders();
-            builder.Logging.AddConsole();
-            builder.Logging.AddDebug();
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
