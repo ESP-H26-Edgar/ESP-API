@@ -76,7 +76,9 @@ public class Program
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
