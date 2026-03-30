@@ -3,7 +3,7 @@
  > Application codée en C# pour la back-end avec une API en .NET
  
  # Prérequis
- 
+  
   ## Installation de Node.js
   ```bash
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
@@ -83,7 +83,26 @@
  # Demarage du serveur en prod :
    Back-end :
    ```bash
-     sudo systemctl start (nom de l'api)
+     cd /var/www/ESP/ESP-API
+     dotnet publish -c Release -o /var/www/ESP/publish
+
+     sudo nano /etc/systemd/system/esp-api.service
+     [Unit]
+     Description=RacePortal API
+     
+     [Service]
+     WorkingDirectory=/var/www/ESP/publish
+     ExecStart=/usr/bin/dotnet /var/www/ESP/publish/ESP.API.dll
+     Restart=always
+     User=root
+     
+     [Install]
+     WantedBy=multi-user.target
+
+     sudo systemctl daemon-reload
+     sudo systemctl enable esp-api
+     
+     sudo systemctl start esp-api
      sudo cp -r dist/* /var/www/html/
 
      sudo systemctl reload nginx
