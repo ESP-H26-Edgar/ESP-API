@@ -25,7 +25,4 @@ public partial class User
 
     public bool IsAdmin { get; set; }
 
-    public virtual ICollection<Registration> Registrations { get; set; } = new List<Registration>();
-
-    public virtual ICollection<Result> Results { get; set; } = new List<Result>();
 }
