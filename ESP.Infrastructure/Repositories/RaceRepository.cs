@@ -16,17 +16,20 @@ namespace ESP.Infrastructure.Repositories
         {
             return await _context.Races.ToListAsync();
         }
+        public async Task<Race?> GetByIdAsync(int id)
+        {
+            return await _context.Races
+                .FirstOrDefaultAsync(r => r.IdRace == id);
+        }
         public async Task<Race> AddAsync(Race race)
         {
             _context.Races.Add(race);
-
-            // LOG TEMPORAIRE - à supprimer après
-            var sql = _context.Database.GenerateCreateScript();
-            Console.WriteLine("=== SCHEMA SQL ===");
-            Console.WriteLine(sql);
-            Console.WriteLine("=== PRICE VALUE ===");
-            Console.WriteLine($"Price: {race.Price}");
-
+            await _context.SaveChangesAsync();
+            return race;
+        }
+        public async Task<Race> DeleteAsync(Race race)
+        {
+            _context.Races.Remove(race);
             await _context.SaveChangesAsync();
             return race;
         }
