@@ -22,7 +22,7 @@ namespace ESP.Application.Services
             using var stream = new FileStream(fullPath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-            return "/images/" + fileName;
+            return fileName;
         }
     }
 }
