@@ -38,6 +38,9 @@ public static class DependencyInjection
         services.AddScoped<InscriptionCourseUseCase>();
         services.AddScoped<GetInscriptionsUseCase>();
 
+        services.AddScoped<IRaceTypeRepository, RaceTypeRepository>();
+        services.AddScoped<IGetAllRaceTypeUseCase, GetAllRaceTypeUseCase>();
+
         services.AddScoped<ImageService>();
 
 
