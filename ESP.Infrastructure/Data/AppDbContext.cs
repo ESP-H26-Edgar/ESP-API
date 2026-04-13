@@ -72,7 +72,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Location).HasMaxLength(200);
             entity.Property(e => e.NumberPlace).HasColumnType("int(11)");
             entity.Property(e => e.RaceName).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnType("decimal(10,2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(10,2)").HasColumnName("Price");
 
             entity.HasOne(d => d.IdRaceTypeNavigation).WithMany(p => p.Races)
                 .HasForeignKey(d => d.IdRaceType)

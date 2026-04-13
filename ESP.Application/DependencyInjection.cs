@@ -1,4 +1,5 @@
 ﻿
+using ESP.Application.Services;
 using ESP.Application.UseCases;
 using ESP.Application.UseCases.Interface;
 using ESP.Application.Validators;
@@ -26,12 +27,16 @@ public static class DependencyInjection
 
         services.AddScoped<IRaceRepository, RaceRepository>();
         services.AddScoped<IGetAllRaceUseCase, GetAllRaceUseCase>();
+        services.AddScoped<ICreateRaceUseCase, CreateRaceUseCase>();
 
         services.AddScoped<IInscriptionRepository, InscriptionRepository>();
         services.AddScoped<IStripeService, StripeService>();
         services.AddScoped<CreationPayementUseCase>();
         services.AddScoped<InscriptionCourseUseCase>();
         services.AddScoped<GetInscriptionsUseCase>();
+
+        services.AddScoped<ImageService>();
+
 
         return services;
     }
