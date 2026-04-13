@@ -68,3 +68,13 @@ fail: 13/04/2026 10:17:59.439 CoreEventId.SaveChangesFailed[10000] (Microsoft.En
          at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
          at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
          at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+warn: 13/04/2026 13:25:27.001 CoreEventId.SensitiveDataLoggingEnabledWarning[10400] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+warn: 13/04/2026 13:25:27.060 RelationalEventId.BoolWithDefaultWarning[20601] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The 'bool' property 'IsAdmin' on entity type 'User' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value 'False', since this is the CLR default for the 'bool' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+info: 13/04/2026 13:25:27.537 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (59ms) [Parameters=[@__mail_0='edgar@gmail.com' (Size = 30)], CommandType='Text', CommandTimeout='30']
+      SELECT `u`.`IdUser`, `u`.`BirthDate`, `u`.`ClubTeam`, `u`.`FirstName`, `u`.`Gender`, `u`.`IsAdmin`, `u`.`LastName`, `u`.`Mail`, `u`.`Nationality`, `u`.`Password`
+      FROM `Users` AS `u`
+      WHERE `u`.`Mail` = @__mail_0
+      LIMIT 1

@@ -12,14 +12,14 @@ namespace ESP.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<Race>> GetAllRaces()
+        public async Task<List<Race>> GetAllAsync()
         {
             return await _context.Races.ToListAsync();
         }
+
         public async Task<Race?> GetByIdAsync(int id)
         {
-            return await _context.Races
-                .FirstOrDefaultAsync(r => r.IdRace == id);
+            return await _context.Races.FirstOrDefaultAsync(x => x.IdRace == id);
         }
         public async Task<Race> AddAsync(Race race)
         {
@@ -27,11 +27,10 @@ namespace ESP.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return race;
         }
-        public async Task<Race> DeleteAsync(Race race)
+        public async Task DeleteAsync(Race race)
         {
             _context.Races.Remove(race);
             await _context.SaveChangesAsync();
-            return race;
         }
     }
 }

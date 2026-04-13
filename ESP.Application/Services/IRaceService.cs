@@ -9,6 +9,6 @@ namespace ESP.Application.Services
 {
     public interface IRaceService
     {
-        public Task<IList<RaceDto>> GetAllRace();
+        public Task<IList<RaceDto>> GetAllAsync();
     }
 }
