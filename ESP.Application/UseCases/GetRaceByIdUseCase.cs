@@ -29,7 +29,14 @@ namespace ESP.Application.UseCases
             {
                 IdRace = race.IdRace,
                 RaceName = race.RaceName,
-                Date = race.Date
+                IdRaceType = race.IdRaceType,
+                Kilometer = race.Kilometer,
+                Location = race.Location,
+                Date = race.Date,
+                Description = race.Description,
+                NumberPlace = race.NumberPlace,
+                Image = race.Image,
+                Price = race.Price
             };
         }
     }
