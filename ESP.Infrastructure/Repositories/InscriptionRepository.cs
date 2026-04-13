@@ -10,23 +10,23 @@ namespace ESP.Infrastructure.Repositories
 {
     public class InscriptionRepository : IInscriptionRepository
     {
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _context;
 
-        public InscriptionRepository(AppDbContext db)
+        public InscriptionRepository(AppDbContext context)
         {
-            _db = db;
+            _context = context;
         }
 
         public async Task AddAsync(Registration registration)
-            => await _db.Registrations.AddAsync(registration);
+            => await _context.Registrations.AddAsync(registration);
 
         public async Task SaveChangesAsync()
-            => await _db.SaveChangesAsync();
+            => await _context.SaveChangesAsync();
 
         // Génère un numero de dossard unique pour cette course
         public async Task<int> GenerateBibNumberAsync(int idRace)
         {
-            var max = await _db.Registrations
+            var max = await _context.Registrations
                 .Where(r => r.IdRace == idRace)
                 .MaxAsync(r => (int?)r.BibNumber) ?? 0;
 
@@ -34,7 +34,7 @@ namespace ESP.Infrastructure.Repositories
         }
         public async Task<bool> AlreadyExistsAsync( int idRace, string nom, string prenom, DateOnly dateNaissance, string email)
         {
-            return await _db.Registrations.AnyAsync(r =>
+            return await _context.Registrations.AnyAsync(r =>
                 r.IdRace == idRace &&
                 r.Nom == nom &&
                 r.Prenom == prenom &&
@@ -43,10 +43,10 @@ namespace ESP.Infrastructure.Repositories
             );
         }
         public async Task<IEnumerable<Registration>> GetAllAsync()
-        => await _db.Registrations.ToListAsync();
+        => await _context.Registrations.ToListAsync();
 
         public async Task<IEnumerable<Registration>> GetByRaceAsync(int idRace)
-            => await _db.Registrations
+            => await _context.Registrations
                 .Where(r => r.IdRace == idRace)
                 .ToListAsync();
     }

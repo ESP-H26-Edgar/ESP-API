@@ -11,11 +11,11 @@ public partial class Race
 
     public int IdRaceType { get; set; }
 
-    public int Kilometer { get; set; }
+    public double Kilometer { get; set; }
 
     public string Location { get; set; } = null!;
 
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     public string Description { get; set; } = null!;
 

@@ -10,10 +10,11 @@ namespace ESP.API.Controllers
     public class RaceController : ControllerBase
     {
         private IGetAllRaceUseCase _getAllRaceUseCase;
-
-        public RaceController(IGetAllRaceUseCase getAllRaceUseCase)
+        private readonly ICreateRaceUseCase _createRaceUseCase;
+        public RaceController(IGetAllRaceUseCase getAllRaceUseCase, ICreateRaceUseCase createRaceUseCase)
         {
             _getAllRaceUseCase = getAllRaceUseCase;
+            _createRaceUseCase = createRaceUseCase;
         }
 
         [HttpGet]
@@ -21,6 +22,14 @@ namespace ESP.API.Controllers
         {
             var race = await _getAllRaceUseCase.Execute();
             return Ok(race);
+
         }
+        [HttpPost("Create")]
+        public async Task<ActionResult<RaceDto>> CreateRace([FromForm] CreateRaceRequest request)
+        {
+            var race = await _createRaceUseCase.Execute(request);
+            return Ok(race);
+        }
+
     }
 }
