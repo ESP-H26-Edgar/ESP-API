@@ -16,12 +16,10 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<AppDbContext>(options =>
-            options.UseMySql(
-                connectionString,
-                ServerVersion.AutoDetect(connectionString)
-            ).LogTo(msg => System.IO.File.AppendAllText("ef_log.txt", msg + "\n"),
-             Microsoft.Extensions.Logging.LogLevel.Information)
-            .EnableSensitiveDataLogging());
+         options.UseMySql(
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
+    ));
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IStripeService, StripeService>();
