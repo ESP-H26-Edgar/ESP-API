@@ -16,9 +16,9 @@ namespace ESP.Application.Services
         {
             _raceRepository = raceRepository;
         }
-        public async Task<IList<RaceDto>> GetAllRace()
+        public async Task<IList<RaceDto>> GetAllAsync()
         {
-            var races = await _raceRepository.GetAllRaces();
+            var races = await _raceRepository.GetAllAsync();
             return races.Select(x => new RaceDto(x)).ToList();
         }
     }
