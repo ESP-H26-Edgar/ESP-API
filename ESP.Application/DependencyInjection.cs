@@ -9,6 +9,7 @@ using ESP.Infrastructure.Repositories;
 using ESP.Infrastructure.Security;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using System.Reflection;
 
 namespace ESP.Application;
@@ -29,6 +30,7 @@ public static class DependencyInjection
         services.AddScoped<IGetAllRaceUseCase, GetAllRaceUseCase>();
         services.AddScoped<IGetRaceByIdUseCase, GetRaceByIdUseCase>();
         services.AddScoped<ICreateRaceUseCase, CreateRaceUseCase>();
+        services.AddScoped<IDeleteRaceUseCase, DeleteRaceUseCase>();
 
         services.AddScoped<IInscriptionRepository, InscriptionRepository>();
         services.AddScoped<IStripeService, StripeService>();
