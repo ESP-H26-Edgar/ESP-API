@@ -27,6 +27,7 @@ public static class DependencyInjection
 
         services.AddScoped<IRaceRepository, RaceRepository>();
         services.AddScoped<IGetAllRaceUseCase, GetAllRaceUseCase>();
+        services.AddScoped<IGetRaceByIdUseCase, GetRaceByIdUseCase>();
         services.AddScoped<ICreateRaceUseCase, CreateRaceUseCase>();
 
         services.AddScoped<IInscriptionRepository, InscriptionRepository>();
