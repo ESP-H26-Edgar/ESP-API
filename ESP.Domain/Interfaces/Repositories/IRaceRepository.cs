@@ -10,7 +10,9 @@ namespace ESP.Domain.Interfaces.Repositories
     public interface IRaceRepository
     {
         Task<List<Race>> GetAllRaces();
+        Task<Race?> GetByIdAsync(int id);
         Task<Race> AddAsync(Race race);
+        Task<Race> DeleteAsync(Race race);
     }
 }
 
