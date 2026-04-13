@@ -84,7 +84,7 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRaceType).HasName("PRIMARY");
 
-            entity.ToTable("Racetypes");
+            entity.ToTable("RaceTypes"); 
 
             entity.Property(e => e.IdRaceType).HasColumnType("int(11)");
             entity.Property(e => e.RaceType1)
