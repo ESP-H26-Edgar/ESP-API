@@ -41,7 +41,7 @@ public static class DependencyInjection
         services.AddScoped<IRaceTypeRepository, RaceTypeRepository>();
         services.AddScoped<IGetAllRaceTypeUseCase, GetAllRaceTypeUseCase>();
 
-        services.AddScoped<ImageService>();
+        services.AddScoped<IImageService, ImageService>();
 
 
         return services;

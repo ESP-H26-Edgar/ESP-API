@@ -12,13 +12,13 @@ namespace ESP.Application.UseCases
     public class CreateRaceUseCase : ICreateRaceUseCase
     {
         private readonly IRaceRepository _raceRepository;
-        private readonly ImageService _imageService;
+        private readonly IImageService _imageService;
         private readonly ILogger<CreateRaceUseCase> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CreateRaceUseCase(
             IRaceRepository raceRepository,
-            ImageService imageService,
+            IImageService imageService,
             ILogger<CreateRaceUseCase> logger,
             IHttpContextAccessor httpContextAccessor)
         {

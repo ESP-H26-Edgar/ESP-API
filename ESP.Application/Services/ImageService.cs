@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ESP.Application.Services
 {
-    public class ImageService
+    public class ImageService : IImageService
     {
         private readonly string _path = "wwwroot/images";
 
