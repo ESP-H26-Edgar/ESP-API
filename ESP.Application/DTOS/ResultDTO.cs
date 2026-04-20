@@ -28,3 +28,4 @@ namespace ESP.Application.DTOS
             Prenom = result.IdRegistrationNavigation?.Prenom ?? "—";
         }
     }
+}
