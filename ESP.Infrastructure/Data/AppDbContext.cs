@@ -68,7 +68,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.IdRaceType).HasColumnType("int(11)");
             entity.Property(e => e.Image).HasMaxLength(100);
-            entity.Property(e => e.Kilometer).HasColumnType("int(11)");
+            entity.Property(e => e.Kilometer).HasColumnType("float");
             entity.Property(e => e.Location).HasMaxLength(200);
             entity.Property(e => e.NumberPlace).HasColumnType("int(11)");
             entity.Property(e => e.RaceName).HasMaxLength(50);
