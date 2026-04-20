@@ -21,6 +21,16 @@ namespace ESP.API.Controllers
         {
             var race = await _getAllRaceUseCase.Execute();
             return Ok(race);
+
+
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPost("Create")]
+        public async Task<ActionResult<RaceDto>> CreateRace([FromForm] CreateRaceRequest request)
+        {
+            var race = await _createRaceUseCase.Execute(request);
+            return Ok(race);
+        }
+
     }
 }
