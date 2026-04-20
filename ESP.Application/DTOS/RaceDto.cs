@@ -15,7 +15,7 @@ namespace ESP.Application.DTOS
 
         public int IdRaceType { get; set; }
 
-        public double Kilometer { get; set; }
+        public float Kilometer { get; set; }
 
         public string Location { get; set; } = null!;
 

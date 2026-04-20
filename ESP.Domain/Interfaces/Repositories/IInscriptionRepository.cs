@@ -22,5 +22,7 @@ namespace ESP.Domain.Interfaces.Repositories
         Task<int> GenerateBibNumberAsync(int idRace);
         Task<IEnumerable<Registration>> GetAllAsync();
         Task<IEnumerable<Registration>> GetByRaceAsync(int idRace);
+        Task<int> CountByRaceAsync(int idRace);
+        Task<Race> GetRaceByIdAsync(int idRace);
     }
 }
