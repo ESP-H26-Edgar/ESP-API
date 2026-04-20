@@ -49,24 +49,5 @@ namespace ESP.Application.UseCases
             return _jwtTokenService.GenerateToken(user.Mail, user.IsAdmin, user.IdUser);
         }
 
-        public string GenerateToken(string mail, bool isAdmin)
-        {
-            var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("D452qs456453qsdKBHF!;WXD!Hds241F"));
-
-            var claims = new[]
-            {
-            new Claim(ClaimTypes.Email, mail),
-            new Claim(ClaimTypes.Role, isAdmin ? "Admin" : "User")
-        };
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(60),
-                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
     }
 }

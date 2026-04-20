@@ -39,13 +39,16 @@ namespace ESP.API.Controllers
                 return NotFound();
 
             return Ok(race);
+
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
         public async Task<ActionResult<RaceDto>> CreateRace([FromForm] CreateRaceRequest request)
         {
             var race = await _createRaceUseCase.Execute(request);
             return Ok(race);
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
