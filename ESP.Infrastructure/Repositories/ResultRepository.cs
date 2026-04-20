@@ -15,6 +15,7 @@ namespace ESP.Infrastructure.Repositories
         public async Task<List<Result>> GetByRaceIdAsync(int idRace)
         {
             return await _context.Results
+                .Include(r => r.IdRegistrationNavigation)
                 .Where(r => r.IdRace == idRace)
                 .OrderBy(r => r.Place)
                 .ToListAsync();
