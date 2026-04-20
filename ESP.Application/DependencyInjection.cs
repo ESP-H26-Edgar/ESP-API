@@ -42,6 +42,9 @@ public static class DependencyInjection
         services.AddScoped<IGetAllRaceTypeUseCase, GetAllRaceTypeUseCase>();
 
         services.AddScoped<IImageService, ImageService>();
+        services.AddScoped<IResultRepository, ResultRepository>();
+        services.AddScoped<IGetResultsByRaceUseCase, GetResultsByRaceUseCase>();
+
 
 
         return services;
