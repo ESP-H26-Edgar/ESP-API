@@ -65,7 +65,14 @@ namespace ESP.Application.UseCases
                 DateNaissance = dateNaissance,
                 Phone = phone,
             };
+            var currentCount = await _inscriptionRepository.CountByRaceAsync(idRace);
+            var race = await _inscriptionRepository.GetRaceByIdAsync(idRace);
 
+            if (currentCount >= race.NumberPlace)
+            {
+                _logger.LogWarning("Course full for race {IdRace}", idRace);
+                throw new Exception("Course complète");
+            }
             await _inscriptionRepository.AddAsync(registration);
             await _inscriptionRepository.SaveChangesAsync();
 

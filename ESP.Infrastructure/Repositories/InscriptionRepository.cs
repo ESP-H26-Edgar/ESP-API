@@ -49,5 +49,18 @@ namespace ESP.Infrastructure.Repositories
             => await _context.Registrations
                 .Where(r => r.IdRace == idRace)
                 .ToListAsync();
+
+        public async Task<int> CountByRaceAsync(int idRace)
+        {
+            return await _context.Registrations
+                .CountAsync(r => r.IdRace == idRace);
+        }
+
+        public async Task<Race> GetRaceByIdAsync(int idRace)
+        {
+            return await _context.Races
+                .FirstAsync(r => r.IdRace == idRace);
+        }
     }
+
 }
