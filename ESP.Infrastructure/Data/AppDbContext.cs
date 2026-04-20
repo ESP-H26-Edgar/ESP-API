@@ -115,16 +115,12 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<Result>(entity =>
         {
             entity.HasKey(e => e.IdResult).HasName("PRIMARY");
-
             entity.ToTable("Results");
-
             entity.HasIndex(e => e.IdRace, "IdRace");
-
-            entity.HasIndex(e => new { e.IdUser, e.IdRace }, "IdUser").IsUnique();
-
+            entity.HasIndex(e => new { e.IdRegistration, e.IdRace }, "IdUser").IsUnique();
             entity.Property(e => e.IdResult).HasColumnType("int(11)");
             entity.Property(e => e.IdRace).HasColumnType("int(11)");
-            entity.Property(e => e.IdUser).HasColumnType("int(11)");
+            entity.Property(e => e.IdRegistration).HasColumnName("IdUser").HasColumnType("int(11)");
             entity.Property(e => e.Place).HasColumnType("int(11)");
 
             entity.HasOne(d => d.IdRaceNavigation).WithMany(p => p.Results)
@@ -132,6 +128,10 @@ public partial class AppDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("results_ibfk_2");
 
+            entity.HasOne(d => d.IdRegistrationNavigation).WithMany()
+                .HasForeignKey(d => d.IdRegistration)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Results_ibfk_1");
         });
 
         modelBuilder.Entity<User>(entity =>
