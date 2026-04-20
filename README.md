@@ -3,7 +3,7 @@
  > Application codée en C# pour la back-end avec une API en .NET
  
  # Prérequis
- 
+  
   ## Installation de Node.js
   ```bash
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
@@ -29,33 +29,35 @@
   ```
 
 ## Ajout important 
-   1. Ajout du fichier .env à la racine du projet
-      ```bash
-      DB_HOST=(Votre ip)
-      DB_PORT=(Votre port)
-      DB_NAME=(votre nom de base de données)
-      DB_USER=(votre user)
-      DB_PASSWORD=(votre mot de passe)
-      ```
-   3. Ajout du fichier appsetting.json dans le dossier /ESP.API
-       ```bash
-       {
+   Ajout du fichier appsetting.json dans le dossier /ESP.API
+```bash
+    {
       "ConnectionStrings": {
-          "DefaultConnection": "Server=%DB_HOST%;Port=%DB_PORT%;Database=%DB_NAME%;User=%DB_USER%;Password=%DB_PASSWORD%"
+        "DefaultConnection": "DBconnectionString"
       },
       "Jwt": {
-          "Key": "(Votre TokenJWT ici)",
-          "ExpiresMinutes": "60"
+        "Key": "jwtKey",
+        "Issuer": "Server url",
+        "Audience": "Server url",
+        "ExpiresMinutes": "60"
       },
+
+      "Stripe": {
+        "SecretKey": "secretKey",
+        "WebhookSecret": "webhook"
+      },
+
+
       "Logging": {
-          "LogLevel": {
-              "Default": "Information",
-              "Microsoft.AspNetCore": "Warning"
-          }
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft.AspNetCore": "Warning"
+        }
       },
       "AllowedHosts": "*"
-       }
-       ```
+    }
+
+```
 
  4. Ajoute le package jwt
    ```bash
@@ -81,7 +83,26 @@
  # Demarage du serveur en prod :
    Back-end :
    ```bash
-     sudo systemctl start (nom de l'api)
+     cd /var/www/ESP/ESP-API
+     dotnet publish -c Release -o /var/www/ESP/publish
+
+     sudo nano /etc/systemd/system/esp-api.service
+     [Unit]
+     Description=RacePortal API
+     
+     [Service]
+     WorkingDirectory=/var/www/ESP/publish
+     ExecStart=/usr/bin/dotnet /var/www/ESP/publish/ESP.API.dll
+     Restart=always
+     User=root
+     
+     [Install]
+     WantedBy=multi-user.target
+
+     sudo systemctl daemon-reload
+     sudo systemctl enable esp-api
+     
+     sudo systemctl start esp-api
      sudo cp -r dist/* /var/www/html/
 
      sudo systemctl reload nginx
