@@ -27,6 +27,12 @@ namespace ESP.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return race;
         }
+        public async Task<Race> UpdateAsync(Race race)
+        {
+            _context.Races.Update(race);
+            await _context.SaveChangesAsync();
+            return race;
+        }
         public async Task DeleteAsync(Race race)
         {
             _context.Races.Remove(race);

@@ -47,14 +47,14 @@ namespace ApplicationTests
                 .Setup(x => x.VerifyAndExtractAsync(json, signature))
                 .ReturnsAsync(metadata);
 
-            // AlreadyExistsAsync ne prend plus idUser mais les infos complètes du participant
+            
             _inscriptionRepositoryMock
                 .Setup(x => x.AlreadyExistsAsync(
-                    It.IsAny<int>(),  // idRace
-                    It.IsAny<string>(), // nom
-                    It.IsAny<string>(), // prenom
-                    It.IsAny<DateOnly>(), // dateNaissance
-                    It.IsAny<string>() // adresseMail
+                    It.IsAny<int>(),  
+                    It.IsAny<string>(),
+                    It.IsAny<string>(), 
+                    It.IsAny<DateOnly>(), 
+                    It.IsAny<string>() 
                 ))
                 .ReturnsAsync(false);
 
