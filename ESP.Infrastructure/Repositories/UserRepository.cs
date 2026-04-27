@@ -18,5 +18,11 @@ namespace ESP.Infrastructure.Repositories
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Mail == mail);
         }
+        public async Task AddAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+        }
     }
+
 }
