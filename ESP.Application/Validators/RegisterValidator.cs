@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using ESP.Application.DTOS;
 using FluentValidation;
 
-public class RegisterValidator : AbstractValidator<RegisterDto>
+public class RegisterValidaton : AbstractValidator<RegisterDto>
 {
-    public RegisterValidator()
+    public RegisterValidaton()
     {
         RuleFor(x => x.mail).NotEmpty().EmailAddress();
         RuleFor(x => x.password)

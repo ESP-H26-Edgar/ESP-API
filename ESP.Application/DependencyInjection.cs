@@ -20,9 +20,11 @@ public static class DependencyInjection
         // cette ligne ajoute les validators
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddScoped<LoginUseCase>();
+        services.AddScoped<RegisterUseCase>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddValidatorsFromAssemblyContaining<LoginValidation>();
+        services.AddValidatorsFromAssemblyContaining<RegisterValidaton>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
 
