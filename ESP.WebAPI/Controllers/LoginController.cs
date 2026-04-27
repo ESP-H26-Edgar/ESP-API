@@ -14,10 +14,12 @@ namespace ESP.API.Controllers
 
     {
         private readonly LoginUseCase _loginUseCase;
+        private readonly RegisterUseCase _registerUseCase;
 
-        public LoginController(LoginUseCase loginUseCase)
+        public LoginController(LoginUseCase loginUseCase, RegisterUseCase registerUseCase)
         {
             _loginUseCase = loginUseCase;
+            _registerUseCase = registerUseCase;
         }
 
         [Authorize]
@@ -62,6 +64,23 @@ namespace ESP.API.Controllers
             catch (Exception ex)
             {
                 return Unauthorized(ex.Message);
+            }
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        {
+            try
+            {
+                await _registerUseCase.Execute(dto);
+                return Ok(new { message = "Utilisateur créé" });
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
