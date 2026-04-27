@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationTests
 {
+        //Test réalisé en colaboration avec l'ia, j'ai fais le premier test et il m'a conseiller et aider pour les autres
     public class TestRace
     {
         private Mock<IRaceRepository> _raceRepositoryMock = null!;

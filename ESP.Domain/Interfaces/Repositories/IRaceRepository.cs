@@ -12,6 +12,7 @@ namespace ESP.Domain.Interfaces.Repositories
         Task<List<Race>> GetAllAsync();
         Task<Race?> GetByIdAsync(int id);
         Task<Race> AddAsync(Race race);
+        Task<Race> UpdateAsync(Race race);
         Task DeleteAsync(Race race);
     }
 }

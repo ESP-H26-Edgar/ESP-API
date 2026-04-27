@@ -14,12 +14,14 @@ namespace ESP.API.Controllers
         private readonly ICreateRaceUseCase _createRaceUseCase;
         private readonly IGetRaceByIdUseCase _getRaceByIdUseCase;
         private readonly IDeleteRaceUseCase _deleteRaceUseCase;
-        public RaceController(IGetAllRaceUseCase getAllRaceUseCase, ICreateRaceUseCase createRaceUseCase, IGetRaceByIdUseCase getRaceByIdUseCase, IDeleteRaceUseCase deleteRaceUseCase)
+        private readonly IUpdateRaceUseCase _updateRaceUseCase;
+        public RaceController(IGetAllRaceUseCase getAllRaceUseCase, ICreateRaceUseCase createRaceUseCase, IGetRaceByIdUseCase getRaceByIdUseCase, IDeleteRaceUseCase deleteRaceUseCase, IUpdateRaceUseCase updtateRaceUseCase)
         {
             _getAllRaceUseCase = getAllRaceUseCase;
             _createRaceUseCase = createRaceUseCase;
             _getRaceByIdUseCase = getRaceByIdUseCase;
             _deleteRaceUseCase = deleteRaceUseCase;
+            _updateRaceUseCase = updtateRaceUseCase;
 
         }
 
@@ -48,6 +50,15 @@ namespace ESP.API.Controllers
             var race = await _createRaceUseCase.Execute(request);
             return Ok(race);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("Update")]
+        public async Task<ActionResult<RaceDto>> UpdateRace([FromForm] UpdateRaceRequest request)
+        {
+            var race = await _updateRaceUseCase.Execute(request);
+            return Ok(race);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
