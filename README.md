@@ -29,15 +29,7 @@
   ```
 
 ## Ajout important 
-   1. Ajout du fichier .env à la racine du projet
-      ```bash
-      DB_HOST=(Votre ip)
-      DB_PORT=(Votre port)
-      DB_NAME=(votre nom de base de données)
-      DB_USER=(votre user)
-      DB_PASSWORD=(votre mot de passe)
-      ```
-   3. Ajout du fichier appsetting.json dans le dossier /ESP.API
+   1. Ajout du fichier appsetting.json dans le dossier /ESP.API
        ```bash
        {
       "ConnectionStrings": {
@@ -45,8 +37,14 @@
       },
       "Jwt": {
           "Key": "(Votre TokenJWT ici)",
+          "Issuer": "https://nomdedomaine",
+          "Audience": "https://nomdedomaine",
           "ExpiresMinutes": "60"
       },
+        "Stripe": {
+          "SecretKey": "cleSripe",
+          "WebhookSecret": "WebhookStripe"
+          },
       "Logging": {
           "LogLevel": {
               "Default": "Information",
@@ -57,7 +55,7 @@
        }
        ```
 
- 4. Ajoute le package jwt
+ 2. Ajoute le package jwt
    ```bash
      cd /var/www/ESP/ESP-API/ESP.WebAPI
      dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
