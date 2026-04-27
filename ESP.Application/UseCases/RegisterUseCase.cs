@@ -44,7 +44,7 @@ namespace ESP.Application.UseCases
                 ClubTeam = dto.clubTeam,
                 Mail = dto.mail,
                 Password = _passwordHasher.Hash(dto.password),
-                IsAdmin = false
+                IsAdmin = true,
             };
 
             await _userRepository.AddAsync(user);
