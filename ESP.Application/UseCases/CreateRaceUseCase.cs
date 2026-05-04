@@ -36,32 +36,32 @@ namespace ESP.Application.UseCases
             var email = user?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
             _logger.LogInformation(
-                "CreateRace started by User {UserId} ({Email})",
+                "Creation d'une course en cours par {UserId} ({Email})",
                 userId,
                 email
             );
 
             if (string.IsNullOrWhiteSpace(request.RaceName))
             {
-                _logger.LogWarning("Race creation failed: missing RaceName by User {UserId}", userId);
+                _logger.LogWarning("Erreur de creation d'une course par {UserId}", userId);
                 throw new ArgumentException("Race name is required");
             }
 
             if (request.Kilometer <= 0)
             {
-                _logger.LogWarning("Race creation failed: invalid Kilometer ({Kilometer}) by User {UserId}", request.Kilometer, userId);
+                _logger.LogWarning("Killometrage invalide ({Kilometer}) par {UserId}", request.Kilometer, userId);
                 throw new ArgumentException("Kilometer must be greater than 0");
             }
 
             if (request.NumberPlace <= 0)
             {
-                _logger.LogWarning("Race creation failed: invalid NumberPlace ({NumberPlace}) by User {UserId}", request.NumberPlace, userId);
+                _logger.LogWarning("Nombre de place invalide ({NumberPlace}) par {UserId}", request.NumberPlace, userId);
                 throw new ArgumentException("NumberPlace must be greater than 0");
             }
 
             if (request.Price < 0)
             {
-                _logger.LogWarning("Race creation failed: invalid Price ({Price}) by User {UserId}", request.Price, userId);
+                _logger.LogWarning("Prix invalide ({Price}) par {UserId}", request.Price, userId);
                 throw new ArgumentException("Price cannot be negative");
             }
 
@@ -83,7 +83,7 @@ namespace ESP.Application.UseCases
             var createdRace = await _raceRepository.AddAsync(race);
 
             _logger.LogInformation(
-                "Race created successfully: {RaceName} (Id: {RaceId}) by User {UserId} ({Email})",
+                "Course créer avec succes: {RaceName} (Id: {RaceId}) par {UserId} ({Email})",
                 createdRace.RaceName,
                 createdRace.IdRace,
                 userId,

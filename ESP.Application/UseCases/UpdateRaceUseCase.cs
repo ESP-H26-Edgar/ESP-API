@@ -35,7 +35,7 @@ namespace ESP.Application.UseCases
                 var email = user?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
                 _logger.LogInformation(
-                    "UpdateRace started by User {UserId} ({Email}) for Race {RaceId}",
+                    "Mise a jour en cours par {UserId} ({Email}) pour {RaceId}",
                     userId, email, request.IdRace
                 );
 
@@ -44,25 +44,25 @@ namespace ESP.Application.UseCases
 
                 if (string.IsNullOrWhiteSpace(request.RaceName))
                 {
-                    _logger.LogWarning("Race update failed: missing RaceName by User {UserId}", userId);
+                    _logger.LogWarning("Nom manquant par {UserId}", userId);
                     throw new ArgumentException("Race name is required");
                 }
 
                 if (request.Kilometer <= 0)
                 {
-                    _logger.LogWarning("Race update failed: invalid Kilometer ({Kilometer}) by User {UserId}", request.Kilometer, userId);
+                    _logger.LogWarning("Killometrage invalide ({Kilometer}) par {UserId}", request.Kilometer, userId);
                     throw new ArgumentException("Kilometer must be greater than 0");
                 }
 
                 if (request.NumberPlace <= 0)
                 {
-                    _logger.LogWarning("Race update failed: invalid NumberPlace ({NumberPlace}) by User {UserId}", request.NumberPlace, userId);
+                    _logger.LogWarning("Nombre de place invalide ({NumberPlace}) par {UserId}", request.NumberPlace, userId);
                     throw new ArgumentException("NumberPlace must be greater than 0");
                 }
 
                 if (request.Price < 0)
                 {
-                    _logger.LogWarning("Race update failed: invalid Price ({Price}) by User {UserId}", request.Price, userId);
+                    _logger.LogWarning("Prix invalide ({Price}) par {UserId}", request.Price, userId);
                     throw new ArgumentException("Price cannot be negative");
                 }
 
@@ -83,7 +83,7 @@ namespace ESP.Application.UseCases
                 var updatedRace = await _raceRepository.UpdateAsync(existing);
 
                 _logger.LogInformation(
-                    "Race updated successfully: {RaceName} (Id: {RaceId}) by User {UserId} ({Email})",
+                    "Course mis à jour : {RaceName} (Id: {RaceId}) par {UserId} ({Email})",
                     updatedRace.RaceName, updatedRace.IdRace, userId, email
                 );
 
