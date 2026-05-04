@@ -31,7 +31,7 @@ namespace ESP.Application.UseCases
             var email = user?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
             _logger.LogInformation(
-                "DeleteRace started by User {UserId} ({Email}) for RaceId {RaceId}",
+                "Suppresion en cours par {UserId} ({Email}) pour {RaceId}",
                 userId,
                 email,
                 id
@@ -42,7 +42,7 @@ namespace ESP.Application.UseCases
             if (race == null)
             {
                 _logger.LogWarning(
-                    "DeleteRace failed: Race not found (RaceId {RaceId}) by User {UserId}",
+                    "Course non trouvée : (RaceId {RaceId}) par {UserId}",
                     id,
                     userId
                 );
@@ -53,7 +53,7 @@ namespace ESP.Application.UseCases
             await _raceRepository.DeleteAsync(race);
 
             _logger.LogInformation(
-                "Race deleted successfully: {RaceName} (Id: {RaceId}) by User {UserId} ({Email})",
+                "Suppresion avec succes de {RaceName} (Id: {RaceId})  par {UserId} ({Email})",
                 race.RaceName,
                 race.IdRace,
                 userId,

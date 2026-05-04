@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ESP.Application.UseCases
 {
+    //Le code à été écrit avec l'aide de l'ia 
     public class InscriptionCourseUseCase
     {
         private readonly IInscriptionRepository _inscriptionRepository;
@@ -48,7 +49,7 @@ namespace ESP.Application.UseCases
             );
             if (exists)
             {
-                _logger.LogInformation("Participant already registered: {Nom} {Prenom}", nom, prenom);
+                _logger.LogInformation("Participant deja inscrit: {Nom} {Prenom}", nom, prenom);
                 return;
             }
 
@@ -70,13 +71,13 @@ namespace ESP.Application.UseCases
 
             if (currentCount >= race.NumberPlace)
             {
-                _logger.LogWarning("Course full for race {IdRace}", idRace);
+                _logger.LogWarning("Course complète {IdRace}", idRace);
                 throw new Exception("Course complète");
             }
             await _inscriptionRepository.AddAsync(registration);
             await _inscriptionRepository.SaveChangesAsync();
 
-            _logger.LogInformation("New registration added: {Nom} {Prenom}, Bib #{BibNumber}", nom, prenom, bibNumber);
+            _logger.LogInformation("Inscritpion réussie: {Nom} {Prenom}, Bib #{BibNumber}", nom, prenom, bibNumber);
         }
     }
 }
